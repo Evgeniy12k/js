@@ -3,7 +3,8 @@ var money = 50000,
     addExpenses =' интернет, такси, коммуналка ', 
     deposit = true, 
     mission = 150000,
-    period  = 5;
+    period  = 5,
+    budgetDay;
 // 1 ответ 
  console.log(money);
  console.log(income);
@@ -16,3 +17,4 @@ console.log('Период равен'+' '+period+' '+ 'месяцев.'+' '
 //  4 ответ
  console.log(addExpenses.toLowerCase().split(','));    
 // 5 ответ
+console.log(budgetDay=money/30);
