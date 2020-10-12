@@ -1,22 +1,4 @@
 'use strickt';
-// let money,
-//     income = 'фриланс', 
-//     addExpenses, 
-//     deposit = true, 
-      
-//     period  = 5,
-//     budgetDay;
-// // 1 ответ 
- 
-//  console.log(income);
-//  console.log(deposit);
-// // 2 ответ
-// // 3 ответ 
-// console.log('Период равен'+' '+period+' '+ 'месяцев.'+' '
-//             +'Цель заработать'+' '+ mission+' '+ 'рублей/долларов/гривен/юани');
-  
-// // 5 ответ
-// console.log(budgetDay=money/30);
 
 // ================================
 // Урок 3
@@ -56,23 +38,21 @@
    console.log('Бюджет на месяц'+' '+budgetDay);
 
 //    условия 
-   if (budgetDay>1200){
-                console.log('У вас высокий уровень дохода');
-   }else if (budgetDay > 600 && budgetDay<1200){
 
-                console.log('У вас средний уровень дохода');
-   }
-   else if (budgetDay < 600 && budgetDay>0){
-
-                console.log('К сожалению у вас уровень дохода ниже среднего');
-}else {
-                console.log('Что то пошло не так');
-      }
 
 
     switch(budgetDay){
-        case 600:
+        case budgetDay<1200:
+        case budgetDay>600:
                 console.log('У вас средний уровень дохода');
+        break;
+        case budgetDay<600:
+            case budgetDay>0:
+            console.log('К сожалению у вас уровень дохода ниже среднего');
+        break;
+
+        case budgetDay>1200:
+        console.log('У вас высокий уровень дохода');
         break;
 
         case 1200:
