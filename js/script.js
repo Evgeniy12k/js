@@ -1,4 +1,4 @@
-var money = 50000, 
+let money = 50000, 
     income = 'фриланс', 
     addExpenses =' интернет, такси, коммуналка ', 
     deposit = true, 
