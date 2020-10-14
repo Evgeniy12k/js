@@ -1,5 +1,11 @@
 'use strickt';
 
+let money = 50000, 
+    income = 'фриланс', 
+    addExpenses =' интернет, такси, коммуналка ', 
+    deposit = true, 
+    mission = 150000,
+    period  = 5;
 
 
 // ================================
@@ -19,7 +25,7 @@ console.log('обязательные расходы '+ expenses);
 
 // 2 вопрос
 
-let money = prompt('Ваш месячный доход?');
+// let money = prompt('Ваш месячный доход?');
 
 function getAccumulatedMonth(expenses1, expenses2 ){
    return money - expenses;
@@ -31,7 +37,7 @@ function getAccumulatedMonth(expenses1, expenses2 ){
 // выполнил выше 
 
 // 4 вопрос
-let mission = prompt('цель');
+// let mission = prompt('цель');
 
 function getTargetMonth (expenses1, expenses2 ){
    return  Math.ceil(mission / accumulatedMonth);
