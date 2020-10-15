@@ -78,10 +78,10 @@ function getAccumulatedMonth( ){
 
    //   определет достижение цели
 
-function getTargetMonth (expenses1, expenses2 ){
+function getTargetMonth ( ){
       return  Math.ceil(mission / getAccumulatedMonth());  
     }
- let targetMonth = getTargetMonth(+mission / getAccumulatedMonth() );
+ let targetMonth = getTargetMonth(mission / getAccumulatedMonth() );
      if (targetMonth < 0 ){
     console.log('Цель не будет достигнута ');
    } else {
