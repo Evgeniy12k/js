@@ -22,7 +22,7 @@ let money,
 let start = function () {
   do {
         money = prompt("Ваш месячный доход?");
-        
+
 } while (!isNumber(money));
       money = Number(money);
    };
@@ -70,20 +70,20 @@ console.log('обязательные расходы '+ expensesAmount);
 
 //  вычисляются расходы
 
-function getAccumulatedMonth(expenses1, expenses2 ){
+function getAccumulatedMonth( ){
      return money - expensesAmount;
    }
- let accumulatedMonth = getAccumulatedMonth(+money - +expensesAmount );
-   console.log( 'Накопления за месяц '+ accumulatedMonth);
+ getAccumulatedMonth();
+   console.log( 'Накопления за месяц '+ getAccumulatedMonth());
 
    //   определет достижение цели
 
 function getTargetMonth (expenses1, expenses2 ){
-      return  Math.ceil(mission / accumulatedMonth);  
+      return  Math.ceil(mission / getAccumulatedMonth());  
     }
- let TargetMonth = getTargetMonth(+mission / +accumulatedMonth );
-     if (TargetMonth < 0 ){
+ let targetMonth = getTargetMonth(+mission / getAccumulatedMonth() );
+     if (targetMonth < 0 ){
     console.log('Цель не будет достигнута ');
    } else {
-    console.log('Цель  будет достигнута '+ +TargetMonth);
+    console.log('Цель  будет достигнута '+ targetMonth);
    }
