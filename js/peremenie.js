@@ -1,61 +1,72 @@
-// ================================
-// Урок 3
-// ================================
-// // 1 вопрос
-//   let money = prompt('Ваш месячный доход?');
-//    console.log( Number(money));
-// //  2 вопрос
-//   let addExpenses= prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-//    console.log(addExpenses);
-// //  3 вопрос
-//   let deposit= confirm('Есть ли у вас депозит в банке?');
-//   console.log(deposit);
-// // 4 вопрос
-//   let expenses1 = prompt('Введите обязательную статью расходов?');
-//    console.log(  Number(expenses1));
-// // 5 вопрос
-//   let expenses2 = prompt('Введите обязательную статью расходов?');
-//    console.log( Number(expenses2));
- 
-//    let amount1 = prompt('Во сколько это обойдется?');
-//    console.log(amount1);
-  
-//    let amount2 = prompt('Во сколько это обойдется?');
-//     console.log(amount2);
-// // 6 вопрос
-//    let budgetMonth;
-//    budgetMonth = money-expenses1-expenses2;
-//    console.log('Бюджет на месяц'+' '+budgetMonth);
-// // 7 вопрос
-//    let mission = 150000;
-//    let  target = Math.ceil(mission/budgetMonth);
-//    console.log('Цель будет достигнута'+' '+target);
-  
-// // 8 вопрос
-//    let budgetDay =+Math.floor(budgetMonth/30);
-//    console.log('Бюджет на месяц'+' '+budgetDay);
-
-// //    условия 
+// // проверяет является ли числом.
+// // принимает число и возвращаетс True или False/
+// //  isFinite(n) определяет конечное ли число
+//  let isNumber = function(n){
+//     return !isNaN(parseFloat(n)) && isFinite(n);
+//  };
 
 
 
-//    switch(budgetDay){
-//     case budgetDay<1200:
-//         case budgetDay>600:
-           
-//           return  console.log('У вас средний уровень дохода');
-//         break;
-//         case budgetDay<600:
-//             case budgetDay>0:
-//           return  console.log('К сожалению у вас уровень дохода ниже среднего');
-//         break;
-//         case budgetDay>1200:
-//           return console.log('У вас высокий уровень дохода');
-//         break;
-//         case 1200:
-//            return console.log('У вас высокий уровень дохода');
-//         break;
-//         case 0:
-//            return console.log('К сожалению у вас уровень дохода ниже среднего');
-//         break;
+// //     deposit = true, 
+
+
+// // ждет от пользователя ответа(число)
+
+
+
+// // let showTypeOf = function(item){
+// //       console.log(item);
+// //       };
+// //       showTypeOf( money);
+// //       showTypeOf( income);
+// //       showTypeOf(deposit);
+
+// let expenses1, expenses2;
+
+// function getExpensesMonth(){
+//    let sum  = 0;
+//    let sum2;
+
+//     for (let i = 0; i<2; i++){
+//       //  проверяет первое условие
+//        if (i===0){
+//           expenses1 = prompt('Введите обязательную статью расходов?');
+//       // проверяет второе условие
+//       }if(i===1){
+//           expenses2 = prompt('Введите обязательную статью расходов?','квартира' );
+//       }
+//       // ждет от пользователя правильного значения(число)
+//     do{
+//       sum2 = prompt('Во сколько это обойдется?')
+//        }
+//       //  проверяет является ли запрос числом
+//     while ( !isNumber(sum2));
+//          sum += +sum2;
+
+//     }
+//        console.log(sum2);
+//    return sum;
+// }
+
+//  let expensesAmount = getExpensesMonth();
+// console.log('обязательные расходы '+ expensesAmount);
+
+// //  вычисляются расходы
+
+// function getAccumulatedMonth( ){
+//      return money - expensesAmount;
+//    }
+//  getAccumulatedMonth();
+//    console.log( 'Накопления за месяц '+ getAccumulatedMonth());
+
+//    //   определет достижение цели
+
+// function getTargetMonth ( ){
+//       return  Math.ceil(mission / getAccumulatedMonth());  
+//     }
+//  let targetMonth = getTargetMonth(mission / getAccumulatedMonth() );
+//      if (targetMonth < 0 ){
+//     console.log('Цель не будет достигнута ');
+//    } else {
+//     console.log('Цель  будет достигнута '+ targetMonth);
 //    }
