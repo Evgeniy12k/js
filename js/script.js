@@ -3,11 +3,12 @@
 // Урок 7.Объекты.
 // ================================
 
+// проверяет является ли числом
 let isNumber = function(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
     };
 
-
+// вводим бюджет. Проверяем на число
 let money,
     start = function () {
          do {
@@ -20,7 +21,7 @@ let money,
 // соаздание объекта  appData
 
 let expenses1, expenses2;
- let  appData = {
+let  appData = {
          inccome: {},
          addIncome: [],
          expenses:{},
@@ -38,8 +39,8 @@ let expenses1, expenses2;
                 appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
                 appData.deposit = confirm ('Есть ли у вас депозит в банке?');
 
-        let number = 0;
-        let exp = [];
+ let number = 0;
+let exp = [];
 
         for (let i = 0; i < 2; i++) {
 
@@ -64,7 +65,7 @@ let expenses1, expenses2;
               return (appData.expensesMonth = sum); 
           },
                
-
+            // бюджет за месяц
          getBurget: function(){
            appData.budgetMonth = appData.budget - appData.expensesMonth;
             
@@ -74,7 +75,8 @@ let expenses1, expenses2;
          getTargetMonth: function(){
                      return  Math.floor(appData.mission / appData.budgetMonth);
          
-                },
+                }, 
+                // Статус по доходам
          getStatusIncome: function(){
             if (appData.budgetDay > 1200) {
                return('высокий доход');
