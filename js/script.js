@@ -15,9 +15,9 @@ let money,
                money = prompt("Ваш месячный доход?");
       } while (!isNumber(money));
             money = Number(money);
-            return money;
+            // return money;
          };
-
+         start(); 
 
 // соаздание объекта  appData
 
@@ -30,7 +30,7 @@ let  appData = {
          deposit:  false,
          mission: 150000,
          period: 5,
-         budget: start(),
+         budget: money,
          budgetDay: 0,
          budgetMonth: 0,
          expensesMonth: 0,
@@ -53,8 +53,7 @@ let exp = [];
             while (!isNumber(number));
                    appData.expenses[exp[i]] = number; 
         }
-    },
-              
+    },       
                   
          getExpensesMonth: function(){
               let sum = 0;
@@ -63,7 +62,7 @@ let exp = [];
               for (let key in appData.expenses) {
                   sum = sum + Number(appData.expenses[key]); 
               }
-              return (appData.expensesMonth = sum); 
+              appData.expensesMonth = sum; 
           },
                
             // бюджет за месяц
@@ -74,7 +73,7 @@ let exp = [];
          
          },
          getTargetMonth: function(){
-                     return  Math.floor(appData.mission / appData.budgetMonth);
+            return Math.floor(appData.mission / appData.budgetMonth);
          
                 }, 
                 // Статус по доходам
@@ -98,16 +97,25 @@ let exp = [];
 
             
          };
-    
- appData.asking();
- console.log('Расходы за месяц: ' + appData.getExpensesMonth());
-
-//  appData.getBudget();
-
-
- console.log(appData.getStatusIncome());
-
- console.log('Наша программа включает в себя данные:');
- for (let key in appData) {
-     console.log(key + ': ' + appData[key]);
- }
+ 
+ console.log('деньги',appData.budget);
+  appData.asking();
+  appData.getExpensesMonth();
+  
+  console.log('Расходы за месяц: ' + appData.expensesMonth);
+ 
+  console.log('бюджет', appData.budget );  
+ 
+  console.log('проверка', appData.expensesMonth);
+ 
+  console.log('за день', appData.budgetDay)
+ if (appData.getTargetMonth() >= 0) {
+     console.log('Цель будет достигнута за: ' + appData.getTargetMonth() + ' месяца');
+   } else {
+     console.log('Цель не будет достигнута');
+   };
+  console.log(appData.getStatusIncome())
+  console.log('Наша программа включает в себя данные:');
+  for (let key in appData) {
+      console.log(key + ': ' + appData[key]);
+  };
