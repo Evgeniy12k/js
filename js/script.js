@@ -101,6 +101,7 @@ let exp = [];
  console.log('деньги',appData.budget);
   appData.asking();
   appData.getExpensesMonth();
+  appData.getBurget();
   
   console.log('Расходы за месяц: ' + appData.expensesMonth);
  
