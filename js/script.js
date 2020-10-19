@@ -36,7 +36,7 @@ let  appData = {
 
          asking: function(){
             let addExpenses= prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-                appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
+                appData.addExpenses = addExpenses.toLowerCase().split(',');
                 appData.deposit = confirm ('Есть ли у вас депозит в банке?');
 
  let number = 0;
