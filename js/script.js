@@ -15,8 +15,9 @@ let money,
                money = prompt("Ваш месячный доход?");
       } while (!isNumber(money));
             money = Number(money);
+            return money;
          };
-  start();
+
 
 // соаздание объекта  appData
 
@@ -39,7 +40,7 @@ let  appData = {
                 appData.addExpenses = addExpenses.toLowerCase().split(',');
                 appData.deposit = confirm ('Есть ли у вас депозит в банке?');
 
- let number = 0;
+let number = 0;
 let exp = [];
 
         for (let i = 0; i < 2; i++) {
@@ -51,7 +52,7 @@ let exp = [];
             }
             while (!isNumber(number));
                    appData.expenses[exp[i]] = number; 
-        };
+        }
     },
               
                   
@@ -93,34 +94,20 @@ let exp = [];
               } else {      
                return('что-то пошло не так'); 
               }
-         }   
+         },   
 
             
          };
     
  appData.asking();
  console.log('Расходы за месяц: ' + appData.getExpensesMonth());
-appData.getBurget();
 
- if ( appData.getTargetMonth < 0 ){
-        console.log('Цель не будет достигнута ');
-        } else {
-         console.log('Цель  будет достигнута '+appData.getTargetMonth );
-        };
+//  appData.getBudget();
 
 
- 
-// let expensesAmount =appData.getExpensesMonth();
-//  console.log('обязательные расходы '+ expensesAmount);
-//  //  вычисляются расход
-//  function getAccumulatedMonth( ){
-//       return money - expensesAmount;
-//     }
-//   appData.getAccumulatedMonth();
-//     console.log( 'Накопления за месяц '+  appData.getAccumulatedMonth());
-//     //   определет достижение цел
- 
-//   let targetMonth =appData.getTargetMonth(appData.mission / getAccumulatedMonth() );
-//     
-    
-//     }
+ console.log(appData.getStatusIncome());
+
+ console.log('Наша программа включает в себя данные:');
+ for (let key in appData) {
+     console.log(key + ': ' + appData[key]);
+ }
