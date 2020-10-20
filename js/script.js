@@ -68,7 +68,15 @@ let  appData = {
  let number = 0;
  let exp = [];
          for (let i = 0; i < 2; i++){
-             exp[i] = prompt('Введите обязательную статью расходов?');
+             
+             
+
+             do {
+                exp[i] = prompt('Введите обязательную статью расходов?'); 
+            }
+            while (!isNaN(exp[i]));
+                  appData.expenses[exp[i]] = exp[i];
+             
              do {
                  number = prompt('Во сколько это обойдется?'); 
              }
@@ -137,7 +145,7 @@ let  appData = {
         
   console.log('деньги',appData.budget);
   appData.asking();
-
+ 
    appData.getExpensesMonth();
    appData.getBurget();
 
