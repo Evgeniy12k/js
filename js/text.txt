@@ -1,0 +1,18 @@
+ if (appData.itemIncome===Number){
+                   return  itemIncome;            
+                              
+             }   appData.addExpenses = addExpenses.toUpperCase().split(' , ');
+
+              text: function(){
+                addExpenses.split(' ');
+                addExpenses.split('')[0];
+                addExpenses.split('')[0].toUpperCase();
+                addExpenses.splice(1);
+                addExpenses.split('')[0].toUpperCase()+addExpenses.slice(1)+ addExpenses.split(' , ');
+
+              return addExpenses.split('')[0].toUpperCase()+addExpenses.slice(1)+ addExpenses.split(' , ');
+             },
+
+
+              appData.addExpenses = addExpenses.split('')[0].toUpperCase()+addExpenses.slice(1)+ addExpenses.split(' , ');
+               appData.deposit = confirm ('Есть ли у вас депозит в банке?');
