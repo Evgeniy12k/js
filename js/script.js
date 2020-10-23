@@ -49,8 +49,8 @@ let ferst = document.querySelector('[class="income-title"]');
 console.log( ferst);
 
 // строка сумма
-let sferst = document.querySelector('.income-amount');
-console.log( sferst);
+let sumferst = document.querySelector('.income-amount');
+console.log( sumferst);
 
  // второе  название
  let second = document.querySelector('input.income-title');
@@ -58,8 +58,8 @@ console.log( sferst);
 
  // строка сумма 2
 
- let ssecond = document.querySelector('.additional_income-item');
- console.log( ssecond);
+ let sumsecond = document.querySelector('.additional_income-item');
+ console.log( sumsecond);
 
 
  // третье  название
@@ -67,8 +67,8 @@ console.log( sferst);
  console.log( third);
 
  // строка сумма 3
- let sthird = document.querySelector('input.additional_income-item');
- console.log( sthird);
+ let sumthird = document.querySelector('input.additional_income-item');
+ console.log( sumthird);
 
  //range 
  let range = document.querySelector('.period-select');
