@@ -1,89 +1,44 @@
 'use strict';
-// ================================
-// Урок 5.Циклы.
-// ================================
+document.body.style.backgroundImage = "url(./image/you-dont-know-js.jpg)";
+ // удаление рекламы
+ const spam = document.querySelector('.adv');
+ console.log(spam);
 
-// проверяет является ли числом.
-// принимает число и возвращаетс True или False/
-//  isFinite(n) определяет конечное ли число
+ spam.remove();
 
- let isNumber = function(n){
-    return !isNaN(parseFloat(n)) && isFinite(n);
- };
+ // заголовок в кние 3
+  const titleBook = document.querySelectorAll('h2');
+ console.log(titleBook);
+ titleBook[4].textContent = 'Книга 3. this и Прототипы Объектов';
 
-let money, 
-    income = 'фриланс',  
-    deposit = true, 
-    mission = 150000,
-    period  = 5;
 
-// ждет от пользователя ответа(число)
+ // смена картинки
+ // const image = document.getElementById('background');
 
-let start = function () {
-  do {
-        money = prompt("Ваш месячный доход?");
-
-} while (!isNumber(money));
-      money = Number(money);
-   };
- start();
-
-let showTypeOf = function(item){
-      console.log(item);
-      };
-      showTypeOf( money);
-      showTypeOf( income);
-      showTypeOf(deposit);
-
-let expenses1, expenses2;
-
-let addExpenses= prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-   console.log(addExpenses.toLowerCase().split(','));
-
-function getExpensesMonth(){
-   let sum  = 0;
-   let sum2;
-
-    for (let i = 0; i<2; i++){
-      //  проверяет первое условие
-       if (i===0){
-          expenses1 = prompt('Введите обязательную статью расходов?');
-      // проверяет второе условие
-      }if(i===1){
-          expenses2 = prompt('Введите обязательную статью расходов?','квартира' );
-      }
-      // ждет от пользователя правильного значения(число)
-    do{
-      sum2 = prompt('Во сколько это обойдется?')
-       }
-      //  проверяет является ли запрос числом
-    while ( !isNumber(sum2));
-         sum += +sum2;
-
-    }
-       console.log(sum2);
-   return sum;
-}
-
- let expensesAmount = getExpensesMonth();
-console.log('обязательные расходы '+ expensesAmount);
-
-//  вычисляются расходы
-
-function getAccumulatedMonth( ){
-     return money - expensesAmount;
-   }
- getAccumulatedMonth();
-   console.log( 'Накопления за месяц '+ getAccumulatedMonth());
-
-   //   определет достижение цели
-
-function getTargetMonth ( ){
-      return  Math.ceil(mission / getAccumulatedMonth());  
-    }
- let targetMonth = getTargetMonth(mission / getAccumulatedMonth() );
-     if (targetMonth < 0 ){
-    console.log('Цель не будет достигнута ');
-   } else {
-    console.log('Цель  будет достигнута '+ targetMonth);
-   }
+ // меняем книги местами
+const booksParent = document.querySelector('.books');
+ const books = document.querySelectorAll('.book');
+ console.log(books);
+ 
+ // записываем каждую книгу с индексом
+ const book1 = books[1],
+       book2 = books[0],
+       book3 = books[4],
+       book4 = books[3],
+       book5 = books[5],
+       book6 = books[2];
+    
+  // очищаем список
+  book1.remove();
+  book2.remove();
+  book3.remove();
+  book4.remove();
+  book5.remove();
+  book6.remove();
+  // добавляем элементы в новый список
+  booksParent.append(book1);
+  booksParent.append(book2);
+  booksParent.append(book3);
+  booksParent.append(book4);
+  booksParent.append(book5);
+  booksParent.append(book6);
