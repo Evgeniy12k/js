@@ -4,11 +4,11 @@ let Calculate = document.getElementById('start');
 console.log(Calculate);
 
  // Кнопки +
- let button1 = document.getElementsByTagName('button')[0];
- console.log(button1);
+ let but = document.getElementsByTagName('button')[0];
+ console.log(but);
 
- let button2 = document.getElementsByTagName('button')[1];
- console.log(button2);
+ let button = document.getElementsByTagName('button')[1];
+ console.log(button);
 
 
 // checkbox
@@ -17,11 +17,11 @@ console.log(checkbox);
 
 // возможных доходов
 
- let possible1 = document.querySelectorAll('.additional_income-item')[0];
- console.log(possible1);
+ let possib = document.querySelectorAll('.additional_income-item')[0];
+ console.log(possib);
 
- let possible2 = document.querySelectorAll('.additional_income-item')[1];
- console.log(possible2);
+ let possible = document.querySelectorAll('.additional_income-item')[1];
+ console.log(possible);
 
 // бюджет
 let budgetdayvalue = document.getElementsByClassName('budget_day-value')[0];
@@ -30,11 +30,11 @@ console.log(budgetdayvalue);
 let expensesmonthvalue = document.getElementsByClassName('expenses_month-value')[0];
 console.log( expensesmonthvalue);
 
-let additional1 = document.getElementsByClassName('additional_income-value')[0];
-console.log( additional1);
+let addition = document.getElementsByClassName('additional_income-value')[0];
+console.log( addition);
 
-let additional2 = document.getElementsByClassName('additional_expenses-value')[0];
-console.log( additional2);
+let additional = document.getElementsByClassName('additional_expenses-value')[0];
+console.log( additional);
 
 let income = document.getElementsByClassName('income_period-value')[0];
 console.log( income);
@@ -45,51 +45,50 @@ console.log( target);
 
 // поля ввода слева
 // первое название
-let input1 = document.querySelector('[class="income-title"]');
-console.log( input1);
+let ferst = document.querySelector('[class="income-title"]');
+console.log( ferst);
 
 // строка сумма
-let sum1 = document.querySelector('[class="income-amount"]');
-console.log( sum1);
+let sferst = document.querySelector('.income-amount');
+console.log( sferst);
 
-// второе  название
-let input2 = document.querySelector('[class="income-title"]');
-console.log( input2);
+ // второе  название
+ let second = document.querySelector('input.income-title');
+ console.log( second);
 
-// строка сумма 2
+ // строка сумма 2
 
-let sum2 = document.querySelector('[class="additional_income-item"]');
-console.log( sum2);
-
-
-// третье  название
-let input3 = document.querySelector('[class="income-title"]');
-console.log( input3);
-
-// строка сумма 3
-let sum3 = document.querySelector('[class="additional_income-item"]');
-console.log( sum3);
-
-//range 
-let range = document.querySelector('[type="range"]');
-console.log( range);
-
-// сумма 
-let summa = document.querySelector('[class="target-amount"]');
-console.log( summa);
-
-// месячный доход сумма
-
-let sum = document.querySelector('[class="salary-amount"]');
-console.log( sum);
+ let ssecond = document.querySelector('.additional_income-item');
+ console.log( ssecond);
 
 
-// обязательные расходы
+ // третье  название
+ let third = document.querySelector('input.income-title');
+ console.log( third);
 
-// название
-let input4 = document.querySelector('[class="expenses-title"]');
-console.log( input4);
+ // строка сумма 3
+ let sthird = document.querySelector('input.additional_income-item');
+ console.log( sthird);
 
-// сумма
-let sum4 = document.querySelector('[class="expenses-amount"]');
-console.log( sum4);
+ //range 
+ let range = document.querySelector('.period-select');
+ console.log( range);
+
+ // сумма 
+ let summa = document.querySelector('input.target-amount');
+ console.log( summa);
+
+ // месячный доход сумма
+
+ let total = document.querySelector('input.salary-amount');
+ console.log( total);
+
+
+ // обязательные расходы
+ // название
+ let fourth = document.querySelector('input.expenses-title');
+ console.log(fourth);
+
+ // сумма
+ let cost = document.querySelector('input.expenses-amount');
+ console.log(cost);
