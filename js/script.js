@@ -13,11 +13,10 @@ document.body.style.backgroundImage = "url(./image/you-dont-know-js.jpg)";
 // ========================
 // заголовок в книге 3
  // ========================
-   const titleBook = document.querySelectorAll('h2');
+   const titleBook = document.querySelectorAll('a');
   console.log(titleBook);
 
-  const elemClone = titleBook[4].cloneNode(true);
-  elemClone.textContent = 'Книга 3. this и Прототипы Объектов';
+  titleBook[4].textContent = 'Книга 3. this и Прототипы Объектов';
 
 //  =======================
 //   меняем книги местами
