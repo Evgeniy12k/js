@@ -13,7 +13,7 @@ document.body.style.backgroundImage = "url(./image/you-dont-know-js.jpg)";
 // ========================
 // заголовок в книге 3
 // ========================
-   const titleBook = document.querySelectorAll('h2');
+   const titleBook = document.querySelectorAll('a');
   console.log(titleBook);
 
    titleBook[4].textContent = 'Книга 3. this и Прототипы Объектов';
