@@ -16,8 +16,7 @@ document.body.style.backgroundImage = "url(./image/you-dont-know-js.jpg)";
    const titleBook = document.querySelectorAll('h2');
   console.log(titleBook);
 
-  const elemClone = titleBook[4].cloneNode(true);
-  elemClone.textContent = 'Книга 3. this и Прототипы Объектов';
+   titleBook[4].textContent = 'Книга 3. this и Прототипы Объектов';
 
 //  =======================
 //   меняем книги местами
