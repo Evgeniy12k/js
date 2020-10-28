@@ -12,7 +12,7 @@ const todoControl = document.querySelector('.todo-control'),
         
 
 ];
-localStorage.setItem('todoData', JSON.stringify(todoData));
+// localStorage.setItem('todoData', JSON.stringify(todoData));
 const getDataFromLocalStorage = () => {
     const data = localStorage.getItem('todoData');
     if (data) {
