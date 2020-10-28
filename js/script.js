@@ -7,13 +7,22 @@ const todoControl = document.querySelector('.todo-control'),
       headerButton = document.querySelector('.header-button');
 // массив для результатов
 
-        let data; 
-      const todoData = [
+      
+     let todoData = [
         
 
 ];
 localStorage.setItem('todoData', JSON.stringify(todoData));
-data = JSON.parse(localStorage.getItem(todoData));
+const getDataFromLocalStorage = () => {
+    const data = localStorage.getItem('todoData');
+    if (data) {
+       todoData = JSON.parse(data);
+    }
+};
+getDataFromLocalStorage();
+
+
+
 
 // 
 const render = function(){
