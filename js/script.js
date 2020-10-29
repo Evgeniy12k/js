@@ -8,7 +8,7 @@ let start = document.getElementById('start');
 
 
 //  кнопка отмена
-let cancel = document.getElementById('cansel');;
+let cancel = document.getElementById('cancel');
 
 
  let buttonPlusTo = document.getElementsByTagName('button')[1];
@@ -93,7 +93,6 @@ let incomeItems = document.querySelectorAll('.income-items');
  // обязательные расходы
  // название
  let fourth = document.querySelector('input.expenses-title');
-
 
  // сумма
  let expensesItems = document.querySelectorAll('.expenses-items');
@@ -387,7 +386,7 @@ if (total.value ===''){
    }
 
 };
-cancel.addEventListener('click', appData.cancel);
+ cancel.addEventListener('click', appData.cancel.bind(appData));
 start.addEventListener('click', appData.start.bind(appData));
 
 periodSelect.addEventListener('input', function(){
