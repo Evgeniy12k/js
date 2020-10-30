@@ -4,41 +4,23 @@ let start = document.getElementById('start');
 
 
  // Кнопки +
- let buttonPlus = document.getElementsByTagName('button')[0];
-
-
+ let buttonPlus = document.getElementsByTagName('button')[0]
 //  кнопка отмена
 let cancel = document.getElementById('cancel');
-
-
  let buttonPlusTo = document.getElementsByTagName('button')[1];
-
-
-
 // checkbox
 let checkbox = document.querySelectorAll('.deposit-checkmark')[0];
-
-
 // возможных доходов
-
  let possib = document.querySelectorAll('.additional_income-item')[0];
-
-
  let additionalIncomeItem = document.querySelectorAll('.additional_income-item');
-
-
 // бюджет
 let budgetDayValue = document.getElementsByClassName('budget_day-value')[0];
 
 let budgetMonthValue = document.getElementsByClassName('budget_month-value')[0];
 let expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0];
-
 let additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0];
-
 let additionalExpensesItem = document.getElementsByClassName('additional_income-item')[0];
-
 let additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0];
-
 let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
 
 
@@ -139,12 +121,18 @@ if (total.value ===''){
 
 
             this.budget = +total.value;
+            this.getExpensesMonth();
             this.getBurget();
+            
             this.getExpenses();
+
+
+           
             this.getAddExpenses();
+            
             this.getAddIncome();
          
-            this.getExpensesMonth();
+           
 
             this.blocked();
             this.showResult();
@@ -241,7 +229,7 @@ if (total.value ===''){
         this.expenses[itemExpenses] = cashExpenses;
 
     }
-});
+}, this);
  },
 
  getIncome: function(){
@@ -282,7 +270,7 @@ if (total.value ===''){
     addExpenses.forEach(function(item){
          item = item.trim();
         if (item !== ''){
-            this.addExpenses.push(item);
+            appData.addExpenses.push(item);
          }
         
 
@@ -293,7 +281,7 @@ if (total.value ===''){
      additionalIncomeItem.forEach(function(item){
               let itemValue = item.value.trim();
      if (itemValue !== ''){
-          this.addIncome.push(itemValue);
+        appData.addIncome.push(itemValue);
        }
       });
    },
@@ -304,38 +292,8 @@ if (total.value ===''){
         this.expensesMonth += +this.expenses[key];
     }
 },
-//  меняем значение ползунка
- 
 
-     
-// вводим данные через цикл
-
-    //  asking: function(){
-
-    //     // дополнительный доход
-
-    //     if (confirm('Есть ли у вас доп заработок?')){
-    //         let itemIncome; 
-    //          do {
-    //             itemIncome = prompt ('Какой у вас доп. доход');
-    //            } while (!isNaN(itemIncome));
-    //         let cashIncome;
-    //          do {
-    //             cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?',10000 );
-              
-    //         } while (isNaN(parseFloat(cashIncome)));
-    //          this.income[itemIncome ] = cashIncome;
-             
-    //     };
-    //      let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-    //      this.addExpenses = addExpenses.replace (/( |^)[а-яёa-z]/g, function(x){ return x.toUpperCase(); } );
-
-           
-
-
-    //     },
-        
-            
+       
       
          // бюджет за месяц
       getBurget: function(){
