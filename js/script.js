@@ -203,7 +203,7 @@ if (total.value ===''){
             let cloneIncomeItem = incomeItems[0].cloneNode(true);
             incomeItems[0].parentNode.insertBefore(cloneIncomeItem, buttonPlus);
             incomeItems = document.querySelectorAll('.income-items');
-            if (incomeItems.length === 2){
+            if (incomeItems.length === 3){
                 buttonPlus.style.display = 'none'; 
             }
      },
