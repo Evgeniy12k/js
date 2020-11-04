@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preload" href="./font/Roboto-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="./css/style.min.css">
+    <script src="script/script.js" defer></script>
 
-    <title>Document</title>
+    <title>BudgetCalculator</title>
 </head>
 <body>
 <h1>Калькулятор личного бюджета</h1>
@@ -49,7 +50,7 @@
             </div>
             <div class="additional_expenses">
                 <div class="additional_expenses-title title">Возможные расходы <span>(перечислите через запятую)</span></div>
-                <input type="text" class="additional_expenses-item" placeholder="название">
+                <input type="text" class="additional_expenses-item" placeholder="Наименование">
 
             </div>
 
@@ -120,6 +121,7 @@
             <div class="control">
                 <button id="start">Рассчитать</button>
                 <button id="cancel">Сбросить</button>
+                <p class="error-msg">Ошибка, поле "Месячный доход должно быть заполненно!</div>
             </div>
         </div>
 
@@ -129,6 +131,6 @@
 
 </section>
 <!--<script src="./script/oop.js"></script>-->
-<script src="js/script.js"></script>
+<!-- <script src="index.js"></script> -->
 </body>
 </html>
