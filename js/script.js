@@ -9,7 +9,7 @@ let start = document.getElementById('start');
 let cancel = document.getElementById('cancel');
  let buttonPlusTo = document.getElementsByTagName('button')[1];
 // checkbox
-let checkbox = document.querySelectorAll('.deposit-checkmark')[0];
+let checkbox = document.getElementById('deposit-check');
 // возможных доходов
  let possib = document.querySelectorAll('.additional_income-item')[0];
  let additionalIncomeItem = document.querySelectorAll('.additional_income-item');
@@ -22,8 +22,9 @@ let additionalIncomeValue = document.getElementsByClassName('additional_income-v
 let additionalExpensesItem = document.getElementsByClassName('additional_income-item')[0];
 let additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0];
 let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
-
-
+let depositBank =  document.querySelector('.deposit-bank');
+let depositAmount =  document.querySelector('.deposit-amount');
+let depositPercent =  document.querySelector('.deposit-percent');
 
 let target = document.getElementsByClassName('expenses_month-value')[0];
 
@@ -122,6 +123,7 @@ class AppData {
 
         this.budget = +total.value;
         this.getExpensesMonth();
+        this.getInfoDeposit();
         this.getBurget();
         this.getExpenses();
         this.getAddExpenses();
@@ -252,7 +254,8 @@ class AppData {
     }
     // бюджет за месяц
     getBurget() {
-        this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
+        const monthDeposit = this.moneyDeposit * (this.persentDeposit / 100);
+        this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
         this.budgetDay = Math.floor(this.budgetMonth / 30);
     }
     //  достижение цели
@@ -280,20 +283,71 @@ class AppData {
     }
     getInfoDeposit() {
         if (this.deposit) {
+            this.persentDeposit = depositPercent.value;
+            this.moneyDeposit = depositAmount.value;
 
+            // do {
+            //     this.persentDeposit = prompt('Какой годовой процент?', '10');
+            // } while (isNaN(parseFloat(this.persentDeposit)));
 
-            do {
-                this.persentDeposit = prompt('Какой годовой процент?', '10');
-            } while (isNaN(parseFloat(this.persentDeposit)));
-
-            do {
-                this.moneyDeposit = prompt('Какая сумма заложена?', '10000');
-            } while (isNaN(parseFloat(this.moneyDeposit)));
+            // do {
+            //     this.moneyDeposit = prompt('Какая сумма заложена?', '10000');
+            // } while (isNaN(parseFloat(this.moneyDeposit)));
         }
     }
     calcPeriod() {
         return this.budgetMonth * periodSelect.value;
+
     }
+    changePercent(){
+        const valueSelect = this.value;
+        console.log(valueSelect);
+          if (valueSelect === 'other'){
+             depositPercent.style.display = 'inline-block';
+             // проверка процент на правильность
+             depositPercent.value = "";
+             depositPercent.addEventListener("input", () => {
+           depositPercent.value = depositPercent.value.replace(/[^0-9]/, "");
+                  
+             if (depositPercent.value <= 100 || depositPercent.valuel > 0 ){
+                this.persentDeposit = depositPercent.value;
+                
+                 }else {
+                    alert('Введите корректное значение в поле проценты'); 
+                    depositPercent.value = '';
+                 }
+                });
+        
+         }else {
+             depositPercent.style.display = 'none';
+            // присваиваем значение от банка
+            depositPercent.value = valueSelect;
+            
+    
+    
+         }
+         }   
+    
+//     проверяем нажатие checkbox
+    depositHandler(){
+        if (checkbox.checked){
+           depositBank.style.display = 'inline-block';
+           depositAmount.style.display = 'inline-block';
+          
+           this.deposit = true;
+           depositBank.addEventListener('change', this.changePercent);
+        }else {
+            depositBank.style.display = 'none';
+            depositAmount.style.display = 'none';
+           
+            depositBank.value  = '';
+            depositAmount.value = '';
+            this.deposit = false;
+            depositBank.removeEventListener('change', this.changePercent);
+        }
+    }
+       
+   
     // все события поместили в функцию
     eventListener() {
         cancel.addEventListener('click', appData.cancel.bind(appData));
@@ -306,6 +360,11 @@ class AppData {
 
         buttonPlusTo.addEventListener('click', appData.addExpensesBlock);
         buttonPlus.addEventListener('click', appData.addIncomeBlock);
+
+
+        // депозит 
+        checkbox.addEventListener('change', appData.depositHandler.bind(appData));
+
 
 
 
