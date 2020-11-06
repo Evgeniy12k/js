@@ -37,7 +37,7 @@ function countTimer(deadline){
         }
        
         if (timer.timeRemaining < 0){
-            clearInterval(updateClock, 1000);
+            clearInterval(period, 1000);
                   
                 timerHours.textContent = '00';
                 timerMinutes.textContent = '00';
@@ -45,7 +45,8 @@ function countTimer(deadline){
         }
       
       };
-      setInterval(updateClock, 1000);
+      updateClock();
+     let period = setInterval(updateClock, 1000);
 }
 
  countTimer('01 december 2020');
