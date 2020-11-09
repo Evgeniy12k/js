@@ -49,29 +49,43 @@ function countTimer(deadline){
      let period = setInterval(updateClock, 1000);
 }
 
- countTimer('01 december 2020');
+ countTimer('10 november 2020');
 
-});
+
 
 // menu
 const toggleMenu = () =>{
     const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
             closeBtn = document.querySelector('.close-btn'),
+            body = document.querySelector('body'),
             menuItems = menu.querySelectorAll('ul>li');
 // функция для закрытия Меню
 const handlerMenu = () => {
-    if (!menu.style.transform || menu.style.transform === `translate(-100%)`){
-        menu.style.transform = `translate(0)`;
-    }else{
-        menu.style.transform = `translate(-100%)`;
-    }
-};       
-// нажатие на кнопку Меню (скрыть и показать)
-btnMenu.addEventListener('click', handlerMenu) ;
-// нажатие на крестик в Меню
-closeBtn.addEventListener('click', handlerMenu);
-// нажатие на все элементы списка(закрытие Меню)
+    menu.classList.toggle('active-menu');
+    // if (!menu.style.transform || menu.style.transform === `translate(-100%)`){
+    //     menu.style.transform = `translate(0)`;
+    // }else{
+    //     menu.style.transform = `translate(-100%)`;
+    // }
+};   
+
+body.addEventListener('click', event => {
+    let target = event.target;
+    console.log(target);
+       let closeMenuBtn = event.target;
+        target = target.closest('.menu');
+        if(target){
+            handlerMenu();
+        } else if (closeMenuBtn.classList.contains('close-btn')){
+            handlerMenu();
+        }else if(closeMenuBtn.contains('ul>li')){
+            handlerMenu();
+        }
+
+});
+
+
  
 menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu ));
 
@@ -85,8 +99,7 @@ toggleMenu();
 
 const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
-        popupBtn = document.querySelectorAll('.popup-btn'),
-        popupClose = document.querySelectorAll('.popup-close');
+        popupBtn = document.querySelectorAll('.popup-btn');
     let popupContent = document.querySelector('.popup-content');
 // все кнопки
     popupBtn.forEach((elem) => {
@@ -140,6 +153,74 @@ const togglePopUp = () => {
             }
         }
     });
+    popup.addEventListener('click', (event) => {
+        let target = event.target;
+
+        if (target.classList.contains('popup-content')){
+            popup.style.display = 'none';
+
+        } else {
+            target = target.closest('.popup-content');
+
+            if(!target){
+                popup.style.display = 'none';
+            };
+
+        };  
+       
+    });
 };
 togglePopUp();
+
+//tab
+const tabs = () => {
+    const tabHeader = document.querySelector('.service-header'),
+          tab = tabHeader.querySelectorAll('.service-header-tab'),
+          tabContent = document.querySelectorAll('.service-tab');
+
+    const toggleTabContent = (index) => {
+        for(let i = 0; i < tabContent.length; i++ ){
+            if (index === i){
+                tab[i].classList.add('active');
+                tabContent[i].classList.remove('d-none');// удаляем невидимости класс
+            }else{
+                 tab[i].classList.remove('active');//скрываем активный класс
+                tabContent[i].classList.add('d-none');
+                
+            }
+        }
+    };
+// событие для элемента родителя
+          tabHeader.addEventListener('click', (event) => {
+            let target = event.target; 
+       
+            target = target.closest('.service-header-tab');
+            
+
+                
+                if (target){
+                   
+                    tab.forEach((item, i)  => {
+                        if (item === target){
+                            toggleTabContent(i);
+                        }
+                    });
+                    
+                 }
+                
+
+              
+            });
+
+      
+         
+};
+tabs();
+});
+
+
+
+
+      
+
 
