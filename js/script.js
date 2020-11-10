@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 // timer
 function countTimer(deadline){
-
+    let period = setInterval(updateClock, 1000);
     let timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
@@ -46,10 +46,10 @@ function countTimer(deadline){
       
       };
       updateClock();
-     let period = setInterval(updateClock, 1000);
+   
 }
 
- countTimer('10 november 2020');
+ countTimer('11 november 2020');
 
 
 
@@ -63,11 +63,7 @@ const toggleMenu = () =>{
 // функция для закрытия Меню
 const handlerMenu = () => {
     menu.classList.toggle('active-menu');
-    // if (!menu.style.transform || menu.style.transform === `translate(-100%)`){
-    //     menu.style.transform = `translate(0)`;
-    // }else{
-    //     menu.style.transform = `translate(-100%)`;
-    // }
+    
 };   
 
 body.addEventListener('click', event => {
@@ -106,9 +102,9 @@ const togglePopUp = () => {
         elem.addEventListener('click', () => {
         //    проверяем если Ширина больше
             if(window.innerWidth > 768){
-                popupContent.style.opacity = '0'; //стартовое значение. Прозрачность 0
+                popupContent.style.opacity = '0'; 
                 let n = 0;
-                const timer = setInterval(() => { //запуск интервалов
+                const timer = setInterval(() => { 
                     n += 0.1;
                     popupContent.style.opacity = `${n}`;
         //  останавливаем таймер
@@ -182,7 +178,7 @@ const tabs = () => {
         for(let i = 0; i < tabContent.length; i++ ){
             if (index === i){
                 tab[i].classList.add('active');
-                tabContent[i].classList.remove('d-none');// удаляем невидимости класс
+                tabContent[i].classList.remove('d-none');// удаляем невидимость класс
             }else{
                  tab[i].classList.remove('active');//скрываем активный класс
                 tabContent[i].classList.add('d-none');
@@ -210,13 +206,129 @@ const tabs = () => {
                 
 
               
-            });
-
-      
-         
+            });      
 };
 tabs();
 });
+
+//  слайдер
+ const slider = () => {
+      const slide = document.querySelectorAll('.portfolio-item'),
+            btn = document.querySelectorAll('.portfolio-btn'),
+            slider = document.querySelector('.portfolio-content');
+
+        // добавляем элементы. Создаем список по кол-ву слайдов
+        let ulDots = document.querySelector('.portfolio-dots');
+            
+        for (let i = 0; i < slide.length; i++) {
+            const dot = document.createElement("li");
+            if (i === 0) {
+                dot.classList.add("dot-active");
+            }
+            dot.classList.add("dot");
+            ulDots.append(dot);
+        }
+        const dot = document.querySelectorAll('.dot');
+
+        // переменная
+    let  currentSlide = 0,
+            interval;
+    // удаляем активный слайд
+    const prevSlide = (elem, index, strClass ) => {
+        elem[index].classList.remove(strClass);
+    };
+    //добав. к след активность  
+    const nextSlide = (elem, index, strClass) => {
+        elem[index].classList.add(strClass);
+    };
+
+
+
+    const autoPlaySlider = () =>{
+        prevSlide(slide, currentSlide, 'portfolio-item-active');
+        prevSlide(dot, currentSlide, 'dot-active' );
+        currentSlide++;
+        //зацикливание слайдов
+        if (currentSlide >= slide.length){
+            currentSlide = 0;
+        }
+
+
+
+       nextSlide(slide, currentSlide, 'portfolio-item-active');
+       nextSlide(dot, currentSlide, 'dot-active');
+
+    };
+    const startSlider = (time = 2000) =>{
+       interval = setInterval(autoPlaySlider, time);
+    };
+
+    const stopSlider = () =>{
+        clearInterval(interval);
+    };
+        slider.addEventListener('click', (event) => {
+            event.preventDefault();
+            let target = event.target;
+            
+            if(!target.matches('.portfolio-btn, .dot')){
+                return;
+            }
+            
+            
+            // сначала удаляем активный элемент
+            
+            prevSlide(slide, currentSlide, 'portfolio-item-active');
+            prevSlide(dot, currentSlide, 'dot-active' );
+
+            if (target.matches('#arrow-right')){
+                currentSlide ++;
+                    
+            }else if (target.matches('#arrow-left')){
+                currentSlide --;
+                // нажатие на точку
+            }else if (target.matches('.dot')){
+                dot.forEach ((elem, index) =>{
+                    if (elem === target){
+                        currentSlide = index;
+                    }
+                });
+            }
+
+            if(currentSlide >= slide.length) {
+                currentSlide = 0;
+            }
+
+            if(currentSlide < 0){
+                currentSlide = slide.length - 1; 
+                
+            }
+
+            nextSlide(slide, currentSlide, 'portfolio-item-active');
+            nextSlide(dot, currentSlide, 'dot-active');
+                
+        });
+
+        slider.addEventListener('mouseover', (event) => {
+            if(event.target.matches('.portfolio-btn') || 
+                event.target.matches('.dot')){
+                    stopSlider();
+                }
+        });
+
+
+        slider.addEventListener('mouseleave', (event) => {
+            if(event.target.matches('.portfolio-btn') || 
+                event.target.matches('.dot')){
+                    startSlider();
+                }
+        });
+
+        startSlider(10000);
+
+ };
+ slider();
+
+
 
 
 
