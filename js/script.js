@@ -269,7 +269,7 @@ tabs();
         slider.addEventListener('click', (event) => {
             event.preventDefault();
             let target = event.target;
-            
+            // ограничение  на срабатывание вне элемента
             if(!target.matches('.portfolio-btn, .dot')){
                 return;
             }
@@ -308,7 +308,7 @@ tabs();
                 
         });
 
-        slider.addEventListener('mouseover', (event) => {
+        slider.addEventListener('mouseenter', (event) => {
             if(event.target.matches('.portfolio-btn') || 
                 event.target.matches('.dot')){
                     stopSlider();
