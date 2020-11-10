@@ -59,7 +59,7 @@ const toggleMenu = () =>{
             menu = document.querySelector('menu'),
             closeBtn = document.querySelector('.close-btn'),
             body = document.querySelector('body'),
-            menuItems = menu.querySelectorAll('ul>li');
+            menuItems = menu.querySelectorAll('ul>li>a');
 // функция для закрытия Меню
 const handlerMenu = () => {
     menu.classList.toggle('active-menu');
@@ -75,7 +75,7 @@ body.addEventListener('click', event => {
             handlerMenu();
         } else if (closeMenuBtn.classList.contains('close-btn')){
             handlerMenu();
-        }else if(closeMenuBtn.contains('ul>li')){
+        }else if(closeMenuBtn.contains('ul>li>a')){
             handlerMenu();
         }
 
@@ -212,123 +212,110 @@ tabs();
 });
 
 //  слайдер
- const slider = () => {
-      const slide = document.querySelectorAll('.portfolio-item'),
-            btn = document.querySelectorAll('.portfolio-btn'),
-            slider = document.querySelector('.portfolio-content');
+  const slider =  () => {
 
-        // добавляем элементы. Создаем список по кол-ву слайдов
-        let ulDots = document.querySelector('.portfolio-dots');
+                const slide = document.querySelectorAll('.portfolio-item'),
+                    slider = document.querySelector('.portfolio-content');
+                let ulDots = document.querySelector('.portfolio-dots');
             
-        for (let i = 0; i < slide.length; i++) {
-            const dot = document.createElement("li");
-            if (i === 0) {
-                dot.classList.add("dot-active");
-            }
-            dot.classList.add("dot");
-            ulDots.append(dot);
-        }
-        const dot = document.querySelectorAll('.dot');
-
-        // переменная
-    let  currentSlide = 0,
-            interval;
-    // удаляем активный слайд
-    const prevSlide = (elem, index, strClass ) => {
-        elem[index].classList.remove(strClass);
-    };
-    //добав. к след активность  
-    const nextSlide = (elem, index, strClass) => {
-        elem[index].classList.add(strClass);
-    };
-
-
-
-    const autoPlaySlider = () =>{
-        prevSlide(slide, currentSlide, 'portfolio-item-active');
-        prevSlide(dot, currentSlide, 'dot-active' );
-        currentSlide++;
-        //зацикливание слайдов
-        if (currentSlide >= slide.length){
-            currentSlide = 0;
-        }
-
-
-
-       nextSlide(slide, currentSlide, 'portfolio-item-active');
-       nextSlide(dot, currentSlide, 'dot-active');
-
-    };
-    const startSlider = (time = 2000) =>{
-       interval = setInterval(autoPlaySlider, time);
-    };
-
-    const stopSlider = () =>{
-        clearInterval(interval);
-    };
-        slider.addEventListener('click', (event) => {
-            event.preventDefault();
-            let target = event.target;
-            // ограничение  на срабатывание вне элемента
-            if(!target.matches('.portfolio-btn, .dot')){
-                return;
-            }
-            
-            
-            // сначала удаляем активный элемент
-            
-            prevSlide(slide, currentSlide, 'portfolio-item-active');
-            prevSlide(dot, currentSlide, 'dot-active' );
-
-            if (target.matches('#arrow-right')){
-                currentSlide ++;
-                    
-            }else if (target.matches('#arrow-left')){
-                currentSlide --;
-                // нажатие на точку
-            }else if (target.matches('.dot')){
-                dot.forEach ((elem, index) =>{
-                    if (elem === target){
-                        currentSlide = index;
+                for (let i = 0; i < slide.length; i++) {
+                    const dot = document.createElement("li");
+                    if (i === 0) {
+                        dot.classList.add("dot-active");
                     }
-                });
-            }
-
-            if(currentSlide >= slide.length) {
-                currentSlide = 0;
-            }
-
-            if(currentSlide < 0){
-                currentSlide = slide.length - 1; 
-                
-            }
-
-            nextSlide(slide, currentSlide, 'portfolio-item-active');
-            nextSlide(dot, currentSlide, 'dot-active');
-                
-        });
-
-        slider.addEventListener('mouseover', (event) => {
-            if(event.target.matches('.portfolio-btn') || 
-                event.target.matches('.dot')){
-                    stopSlider();
+                    dot.classList.add("dot");
+                    ulDots.append(dot);
                 }
-        });
+                
+            const dot = document.querySelectorAll('.dot');
 
+            let currentSlide = 0,
+                interval;
 
-        slider.addEventListener('mouseout', (event) => {
-            if(event.target.matches('.portfolio-btn') || 
-                event.target.matches('.dot')){
-                    startSlider();
+            const prevSlide = (elem, index, strClass) => {
+                elem[index].classList.remove(strClass);
+            };
+
+            const nextSlide = (elem, index, strClass) => {
+                elem[index].classList.add(strClass);
+            };
+
+            const autoPlaySlide = () => {
+
+                prevSlide(slide, currentSlide, 'portfolio-item-active');
+                prevSlide(dot, currentSlide, 'dot-active');
+                currentSlide++;
+                if(currentSlide >= slide.length){
+                    currentSlide = 0;
                 }
-        });
+                nextSlide(slide, currentSlide, 'portfolio-item-active');
+                nextSlide(dot, currentSlide, 'dot-active');
+            };
 
-        startSlider(10000);
+            const startSlide = (time = 3000) => {
+                interval = setInterval(autoPlaySlide, time);
+            };
 
- };
- slider();
+            const stopSlide = () => {
+                clearInterval(interval);
+            };
 
+            slider.addEventListener('click', (event) => {
+                event.preventDefault();
 
+                let target = event.target;
+
+                if(!target.matches('.portfolio-btn, .dot')){
+                    return;
+                }
+                
+                prevSlide(slide, currentSlide, 'portfolio-item-active');
+                prevSlide(dot, currentSlide, 'dot-active');
+
+                if(target.matches('#arrow-right')){
+                    currentSlide++;
+                }else if(target.matches('#arrow-left')){
+                    currentSlide--;
+                } else if(target.matches('.dot')){
+                    dot.forEach((elem, index) => { //здесь элементом выступают точки
+                        if(elem === target){
+                            currentSlide = index;
+                        }
+                    });
+                }
+
+                if(currentSlide >= slide.length) {
+                    currentSlide = 0;
+                }
+
+                if(currentSlide < 0){
+                    currentSlide = slide.length -1; 
+                    //длинна массива больше на единцу, чем индекс последнего элемента.
+                    //для этого мы вычитаем единицу 
+                }
+                nextSlide(slide, currentSlide, 'portfolio-item-active');
+                nextSlide(dot, currentSlide, 'dot-active');
+
+            });
+
+            slider.addEventListener('mouseover', (event) => {
+                if(event.target.matches('.portfolio-btn') || 
+                    event.target.matches('.dot')){
+                        stopSlide();
+                    }
+            });
+
+            slider.addEventListener('mouseleave', (event) => {
+                if(event.target.matches('.portfolio-btn') || 
+                    event.target.matches('.dot')){
+                        startSlide();
+                    }
+            });
+
+            startSlide(10000);
+
+            };
+            slider();
 
 
 
