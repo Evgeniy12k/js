@@ -308,7 +308,7 @@ tabs();
                 
         });
 
-        slider.addEventListener('mouseenter', (event) => {
+        slider.addEventListener('mouseover', (event) => {
             if(event.target.matches('.portfolio-btn') || 
                 event.target.matches('.dot')){
                     stopSlider();
@@ -316,7 +316,7 @@ tabs();
         });
 
 
-        slider.addEventListener('mouseleave', (event) => {
+        slider.addEventListener('mouseout', (event) => {
             if(event.target.matches('.portfolio-btn') || 
                 event.target.matches('.dot')){
                     startSlider();
