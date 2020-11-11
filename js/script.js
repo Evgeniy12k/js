@@ -312,10 +312,11 @@ tabs();
                     }
             });
 
-            startSlide(10000);
+            startSlide(1500);
 
             };
             slider();
+
 
 
 
