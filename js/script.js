@@ -1,168 +1,115 @@
 'use strict';
-// ================================
-// Урок 8.Работа со страницей
-// ================================
-
-// проверяет является ли числом
-let isNumber = function(n){
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    };
-
-// вводим бюджет. Проверяем на  число
-let money,
-    start = function () {
-         do {
-               money = prompt("Ваш месячный доход?");
-      } while (!isNumber(money));
-            money = Number(money);
-            // return money;
-         };
-         start(); 
-
-// соаздание объекта  appData
-
-let expenses1, expenses2;
-let  appData = {
-         income: {},
-         addIncome: [],
-         expenses:{},
-         addExpenses: [],
-         deposit:  false,
-         persentDeposit: 0,
-         moneyDeposit: 0,
-         mission: 150000,
-         period: 5,
-         budget: money,
-         budgetDay: 0,
-         budgetMonth: 0,
-         expensesMonth: 0,
-
-         
-// вводим данные через цикл
 
 
-           
+class Todo {
+    constructor(form, input, todolist, todoCompleted){
+        this.form = document.querySelector(form);
+        this.input = document.querySelector(input);
+        this.todoList = document.querySelector(todolist);
+        this.todoCompleted = document.querySelector(todoCompleted);
+        this.todoData = new Map(JSON.parse(localStorage.getItem('toDolist')));
 
-         asking: function(){
+   
+    }
+// загрузка в Local
+    addToStorage(){
+         localStorage.setItem('toDolist', JSON.stringify([...this.todoData]))
+    }
 
-            // дополнительный доход
-
-            if (confirm('Есть ли у вас доп заработок?')){
-                let itemIncome; 
-                 do {
-                    itemIncome = prompt ('Какой у вас доп. доход');
-                   } while (!isNaN(itemIncome));
-                let cashIncome;
-                 do {
-                    cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?',10000 );
-                  
-                } while (isNaN(parseFloat(cashIncome)));
-                 appData.income[itemIncome ] = cashIncome;
-                 
-            };
-             let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-             appData.addExpenses = addExpenses.replace (/( |^)[а-яёa-z]/g, function(x){ return x.toUpperCase(); } );
-
-               
-
- let number = 0;
- let exp = [];
-         for (let i = 0; i < 2; i++){
-             
-             
-
-             do {
-                exp[i] = prompt('Введите обязательную статью расходов?'); 
-            }
-            while (!isNaN(exp[i]));
-                  appData.expenses[exp[i]] = exp[i];
-             
-             do {
-                 number = prompt('Во сколько это обойдется?'); 
-             }
-             while (!isNumber(number));
-                    appData.expenses[exp[i]] = number; 
-            };
-            },
-            
-                 //   сумма расходов на месяц и день
-          getExpensesMonth: function(){
-               let sum = 0;        
-               for (let key in appData.expenses) {
-                   sum = sum + Number(appData.expenses[key]); 
-               }
-               appData.expensesMonth = sum; 
-           },             
-             // бюджет за месяц
-          getBurget: function(){
-            appData.budgetMonth = appData.budget - appData.expensesMonth;          
-            appData.budgetDay = Math.floor(appData.budgetMonth / 30);       
-          },
-         //  достижение цели
-          getTargetMonth: function(){
-             return Math.floor(appData.mission / appData.budgetMonth);       
-                 }, 
-                 // Статус по доходам
-          getStatusIncome: function(){
-             if (appData.budgetDay > 1200) {
-                return('высокий доход');
-               } else if (appData.budgetDay>600 && appData.budgetDay>1200){       
-                return('средний доход');
-               } else if(appData.budgetDay < 600 && appData.budgetDay>0 ){       
-                return('средний доход');
-               } else if (appData.budgetDay === 1200){      
-                return('высокий доход'); 
-               } else if (appData.budgetDay === 600){       
-                return('средний доход'); 
-               } else if (appData.budgetDay === 0){      
-                return('низкий доход'); 
-               } else {      
-                return('что-то пошло не так'); 
-               }
-            
-          },   
-  
-          getInfoDeposit: function(){
-         if (appData.deposit) {
-            
-            
-            do{
-                appData.persentDeposit = prompt('Какой годовой процент?','10');
-            } while (isNaN(parseFloat(appData.persentDeposit)));
-
-            do{
-                appData.moneyDeposit = prompt('Какая сумма заложена?', '10000');
-            } while (isNaN(parseFloat(appData.moneyDeposit)));   
-        }
-        },
-    
-       
-       calcSavedMoney: function(){
-          return appData.budgetMonth * appData.period;
-       }
-    };
-
+    render(){
+        this.todoList.textContent = '';
+        this.todoCompleted.textContent = '';
         
-  console.log('деньги',appData.budget);
-  appData.asking();
- 
-   appData.getExpensesMonth();
-   appData.getBurget();
+        this.todoData.forEach(this.creteItem, this);
+        this.addToStorage();
+    }
+    // создаем элемнты с нужной структорй. Проверяем значение и распределяем в нужный сипсок
+    creteItem(todo){
+        const li = document.createElement('li');
+        li.classList.add('todo-item');
+        li.key = todo.key;
+        li.insertAdjacentHTML('beforeend',
+         `  <span class="text-todo">${todo.value}</span>
+            <div class="todo-buttons">
+                    <button class="todo-remove"></button>
+                    <button class="todo-complete"></button>
+            </div>`);
+            if (todo.completed){
+                this.todoCompleted.append(li);
+            }else {
+                this.todoList.append(li);
+            }
+            this.input.value = '';
+    }
 
-   console.log('Расходы за месяц: ' + appData.expensesMonth);
 
-   console.log('бюджет', appData.budget );  
-  console.log('проверка', appData.expensesMonth);
+    addTodo(event) {
+        event.preventDefault();
+      
+        
+        if (this.input.value.trim()){
+            const newTodo = {
+                value: this.input.value,
+                completed: false,
+                key: this.generateKey(),
+            };
+            this.todoData.set(newTodo.key, newTodo); //создаем список с нужным ключом
+            
+            this.render();
+        }else  {
+            alert('нужно ввести значение ');
+      }
+      
+       
+       
+    }    
+    
+    generateKey(){
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        
+    }
 
-   console.log('за день', appData.budgetDay)
-  if (appData.getTargetMonth() >= 0) {
-      console.log('Цель будет достигнута за: ' + appData.getTargetMonth() + ' месяца');
-   } else {
-     console.log('Цель не будет достигнута');
-   };
-  console.log(appData.getStatusIncome())
-  console.log('Наша программа включает в себя данные:');
-  for (let key in appData) {
-      console.log(key + ': ' + appData[key]);
-  };
- 
+    deleteItem(event){
+        this.todoData.delete(event.closest('li').key);
+        this.render();
+    }
+// обмен значений 
+    completedItem(event){
+        if (!this.todoData.get(event.closest('li').key).completed){
+            this.todoData.get(event.closest('li').key).completed = true;
+        } else{
+        
+                this.todoData.get(event.closest('li').key).completed = false;
+        }
+        this.render();
+    }
+//  вызов двух методов. В  зависемости от нажатия кнопки
+    hendler() {
+        this.form.addEventListener('submit', this.addTodo.bind(this));
+        document.addEventListener('click', event => {
+            let target = event.target;
+            if (target === target.closest('.todo-remove')){
+                this.deleteItem(target);
+            } if (target === target.closest('.todo-complete')){
+                this.completedItem(target);
+            }
+
+        });  
+
+    }
+
+    init() {
+       
+        this.render();
+       
+         this.hendler();
+    }
+
+    
+
+}
+
+const todo = new Todo('.todo-control', '.header-input', '.todo-list', '.todo-completed');
+
+todo.init();
+
