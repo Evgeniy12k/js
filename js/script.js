@@ -318,9 +318,41 @@ tabs();
             slider();
 
 
+            
+
+            //ввод только чисел в калькуляторе
+
+        document.addEventListener('input', (event) =>{
+            if(event.target.matches('.calc-item ')){
+                event.target.value = event.target.value.replace(/\D/g, '');
+            }
+        });
 
 
+        // Работа с изображениями. Смена аватарки 
 
-      
+        const command = document.querySelector('#command');
+
+        const toggleImg = event => {
+            const target = event.target;
+        
+            if (target.matches('img')) {
+                let a = target.src,
+                    b = target.dataset.img;
+          
+                target.dataset.img= a;
+                target.src= b;
+            }
+        }
+        
+        command.addEventListener('mouseover', toggleImg);
+        command.addEventListener('mouseout', toggleImg);
+
+
+        changeImage();
+
+       
+    
+
 
 
