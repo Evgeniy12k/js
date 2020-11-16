@@ -398,10 +398,9 @@ const countSum = () => {
 
         const target = event.target;
 // события которые происходят со всеми элементами 
-    if (target.matches('.calc-type') || target.matches('.calc-square') || target.matches('.calc-day') ||target.matches('.calc-count')){
-       countSum();
-    }
-
+     if(target.matches('select') || target.matches('input')) {
+                    countSum();
+                }
 
 
 });
