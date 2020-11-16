@@ -391,7 +391,7 @@ const countSum = () => {
 
     }
 
-    totalValue.textContent = total;
+    totalValue.textContent = Math.floor(total);
 };
 
     calcBlock.addEventListener('change', (event) => {
