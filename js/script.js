@@ -497,7 +497,7 @@ for(let i = 0; i < form.length; i++) {
         request.setRequestHeader('Content-Type', 'application/json');
          
 // получение данных 
-        const formData = new FormData(form);
+      
 // при работе с Json формате
          request.send(JSON.stringify(body));
     }
