@@ -427,7 +427,7 @@ const sendForm = () => {
 for(let i = 0; i < form.length; i++) {
     form[i].addEventListener('submit', (event) =>{
         event.preventDefault();
-      this.appendChild(statusMessage);//добавление элемента
+      form[i].appendChild(statusMessage);//добавление элемента
 //  статут загрузки 
         statusMessage.textContent = loadMessage;
 // запрос к серверу
