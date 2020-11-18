@@ -432,7 +432,7 @@ for(let i = 0; i < form.length; i++) {
         statusMessage.textContent = loadMessage;
 // запрос к серверу
         
-        const formData = new FormData(this);
+        const formData = new FormData(form);
        
         let body = {};
         // for (let val of formData.entries()){
