@@ -410,6 +410,102 @@ const countSum = () => {
 };
 
 calc(100);
+
+// работа с формой
+
+// set-ajax-form
+
+const sendForm = () => {
+
+    const errorMessage = 'Что-то пошло  не так',
+          loadMessage = 'Загрузка',
+          successMessage = ' мы скоро с вами свяжемся';
+    const form = document.querySelectorAll('form');
+    const input = document.querySelectorAll('input');
+
+// обработчик события для кнопки форм
+for(let i = 0; i < form.length; i++) {
+    form[i].addEventListener('submit', (event) =>{
+        event.preventDefault();
+       form[i].appendChild(statusMessage);//добавление элемента
+//  статут загрузки 
+        statusMessage.textContent = loadMessage;
+// запрос к серверу
+        
+        const formData = new FormData(this);
+       
+        let body = {};
+        // for (let val of formData.entries()){
+        //     body[val[0]] = val[1];
+        // }
+
+        formData.forEach((val, key) => {
+            body[key] = val;
+        });
+        // 
+        postData(body, () =>{
+            statusMessage.textContent = successMessage;
+        //    очищаем все input 
+            input.forEach((elem) => {
+                elem.value = "";
+                });
+        }, (error) =>{
+            statusMessage.textContent = errorMessage;
+        console.error(error);
+         });
+    });
+}
+
+// проверяем строки Input на правильный ввод текста
+    document.addEventListener('input', (event) => {
+        let target = event.target;
+        if(target.matches('.form-name') || target.matches('.mess') || target.matches('.top-form-name')){
+            target.value = target.value.replace(/[^А-Яа-яЁе ]/gi, '');
+        }
+    });
+// проверяем строки Input на правильный ввод числа
+    document.addEventListener('input', (event) => {
+        let target = event.target;
+        if(target.matches('.form-phone')){
+            target.value = target.value.replace(/[^+0-9]/gi, '');
+        }
+    });
+
+    const statusMessage = document.createElement('div'); 
+    statusMessage.style.cssText = 'color: red';
+    
+    const postData = (body, outputData, errorData) => {
+        const request = new XMLHttpRequest;
+
+        request.addEventListener('readystatechange', () => {
+           
+    // проверка статуса
+            if(request.readyState !== 4) {
+                return;// выход из функции
+            }
+            if(request.status === 200) {
+                outputData();
+            }else {
+                errorData(request.status);
+            }
+    
+            });
+
+// настройка соединения
+        request.open('POST', './server.php');
+// настрока заголовка
+        request.setRequestHeader('Content-Type', 'application/json');
+         
+// получение данных 
+        const formData = new FormData(form);
+// при работе с Json формате
+         request.send(JSON.stringify(body));
+    }
+
+};
+
+sendForm();
+
 });    
   
 
