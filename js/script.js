@@ -443,18 +443,28 @@ for(let i = 0; i < form.length; i++) {
             body[key] = val;
         });
         // 
-        postData(body, () =>{
-            statusMessage.textContent = successMessage;
-        //    очищаем все input 
-            input.forEach((elem) => {
-                elem.value = "";
-                });
-        }, (error) =>{
-            statusMessage.textContent = errorMessage;
-        console.error(error);
-         });
-    });
-}
+        postData(body)
+            .then(() => {
+                  statusMessage.textContent = sucessMessage;
+
+                  setTimeout(() => {
+                                    statusMessage.textContent = '';
+                  },1000);
+                                
+                  input.forEach((elem) => {
+                                    elem.value = "";
+                      });
+             })
+             .catch((error) => {
+                   statusMessage.textContent = errorMessage;
+                 console.log(error);
+             });
+             //выводим сообщение об успешной отправке
+
+          } 
+
+     );
+ }
 
 // проверяем строки Input на правильный ввод текста
     document.addEventListener('input', (event) => {
@@ -472,36 +482,39 @@ for(let i = 0; i < form.length; i++) {
     });
 
     const statusMessage = document.createElement('div'); 
-    statusMessage.style.cssText = 'color: red';
+    statusMessage.style.cssText = 'color: green';
     
-    const postData = (body, outputData, errorData) => {
-        const request = new XMLHttpRequest;
+    const postData = (body) => {
+        
+        return new Promise((resolve, reject) => {
+            //пишем запрос к серверу
+            const request = new XMLHttpRequest();
 
-        request.addEventListener('readystatechange', () => {
-           
-    // проверка статуса
-            if(request.readyState !== 4) {
-                return;// выход из функции
-            }
-            if(request.status === 200) {
-                outputData();
-            }else {
-                errorData(request.status);
-            }
-    
+            //отлавливаем событие отправки
+            request.addEventListener('readystatechange', () => {
+                if(request.readyState !== 4) {
+                    return;
+                }
+                if(request.status === 200) {
+                    resolve();
+                }else {
+                    reject(request.status);
+                }
             });
+            //настраиваем соединенеие
+            request.open('POST', './server.php');
 
-// настройка соединения
-        request.open('POST', './server.php');
-// настрока заголовка
-        request.setRequestHeader('Content-Type', 'application/json');
-         
-// получение данных 
-      
-// при работе с Json формате
-         request.send(JSON.stringify(body));
-    }
+            //настраиваем заголовки
+            request.setRequestHeader('Content-Type', 'application/json');
 
+            //открываем соединение и передаем данные с помощью метода request
+            /*request.send(formData);*/
+
+            //открываем соединение и передаем данные с помощью метода send в JSON формате
+            request.send(JSON.stringify(body));
+        });
+        
+    };
 };
 
 sendForm();
