@@ -490,7 +490,7 @@ for(let i = 0; i < form.length; i++) {
             //пишем запрос к серверу
             const request = new XMLHttpRequest();
 
-            //отлавливаем событие отправки
+            
             request.addEventListener('readystatechange', () => {
                 if(request.readyState !== 4) {
                     return;
@@ -501,14 +501,9 @@ for(let i = 0; i < form.length; i++) {
                     reject(request.status);
                 }
             });
-            //настраиваем соединенеие
+            //подключаемся к серверу
             request.open('POST', './server.php');
-
-            //настраиваем заголовки
             request.setRequestHeader('Content-Type', 'application/json');
-
-            //открываем соединение и передаем данные с помощью метода request
-            /*request.send(formData);*/
 
             //открываем соединение и передаем данные с помощью метода send в JSON формате
             request.send(JSON.stringify(body));
