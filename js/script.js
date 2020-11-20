@@ -445,11 +445,11 @@ for(let i = 0; i < form.length; i++) {
         // 
         postData(body)
             .then(() => {
-                  statusMessage.textContent = sucessMessage;
+                  statusMessage.textContent =  successMessage;
 
-                  setTimeout(() => {
-                                    statusMessage.textContent = '';
-                  },1000);
+                //   setTimeout(() => {
+                //                     statusMessage.textContent = '';
+                //   },1000);
                                 
                   input.forEach((elem) => {
                                     elem.value = "";
